@@ -1,0 +1,46 @@
+import React from "react";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import TrendContent from "../../components/TrendingContent/TrendContent";
+import PaginationComp from "../../components/pagination/PaginationComp";
+
+const Series = () => {
+  const [series, setSeries] = useState([]);
+  const [page, setPage] = useState(1);
+
+  
+  const fetchSeries = async () => {
+    const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=5efa4b075d423dc33f2099d2166c935c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`);
+    setSeries(data.results);
+    // console.log(data);
+  };
+
+  useEffect(() => {
+    fetchSeries();
+    // eslint-disable-next-line
+  }, [page]);
+
+  return (
+    <div>
+    <span className="pageTitle">SEeirs LIST</span>
+    <div className="trendingMovies">
+      {series &&
+        series.map((c) => (
+          <TrendContent
+          key={c.id}
+          id={c.id}
+          poster={c.poster_path}
+          title={c.title || c.name}
+          date={c.first_air_date || c.release_date}
+          media_type="tv"
+          vote_average={c.vote_average}
+          />
+        ))}
+    </div>
+    <PaginationComp setPage={setPage}   />
+  </div>
+  );
+};
+
+export default Series;

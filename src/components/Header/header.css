@@ -1,0 +1,23 @@
+.header{
+    width: 100%;
+    cursor: pointer;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    background-color: #231F20;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5vw;   /* whatever the width of website is the 3 viewport width will be thr */
+    padding-bottom: 15px;
+    box-shadow: 0px 3px 5px black;
+    color: white;
+    z-index: 100;   /* so it will always stayes on the top */
+
+}
+
+@media (max-width : 1000px){
+    .header{
+        padding-top: 15px;
+        font-size: 6.4vw;
+    }
+}
