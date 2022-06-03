@@ -3,13 +3,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import PaginationComp from "./../../components/pagination/PaginationComp";
 import TrendContent from "./../../components/TrendingContent/TrendContent";
-import Genre from "../../components/Generes/Genre";
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
 
-  const [selectedGenres, setSelectedGenres] = useState([]);
-  const [genres, setGenres] = useState([]);
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
@@ -17,7 +14,6 @@ const Movies = () => {
     );
     console.log(data);
     setMovies(data.results);
-    // setNumOfPages(data.total_pages);
   };
 
   useEffect(() => {
@@ -28,14 +24,6 @@ const Movies = () => {
   return (
     <div>
       <span className="pageTitle">MOVIES LIST</span>
-      <Genre
-        type="movie"
-        genres={genres}
-        setGenres={setGenres}
-        selectedGenres={selectedGenres}
-        setSelectedGenres={setSelectedGenres}
-        setPage={setPage}
-      />
       <div className="trendingMovies">
         {movies &&
           movies.map((c) => (
